@@ -5,6 +5,7 @@ import com.limecoding.bookgora.Dto.UserResponseDto;
 import com.limecoding.bookgora.Dto.UserUpdateDto;
 import com.limecoding.bookgora.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
 
     private final UserService userService;
@@ -21,6 +23,10 @@ public class UserController {
     @PostMapping
     public String createUser(@ModelAttribute UserCreateDto userCreateDto) {
         userService.createUser(userCreateDto);
+
+        log.info("회원가입 정보 ={}", userCreateDto.toString());
+
+        log.info("회원가입 완료");
 
         return "redirect:/home";
     }
